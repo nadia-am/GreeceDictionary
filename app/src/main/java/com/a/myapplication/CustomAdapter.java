@@ -1,6 +1,8 @@
 package com.a.myapplication;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,18 +49,22 @@ class CustomAdapter implements ListAdapter {
         return false;
     }
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        Word word=arrayList.get(position);
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        final Word _word=arrayList.get(position);
         if(convertView==null) {
             LayoutInflater layoutInflater = LayoutInflater.from(context);
             convertView=layoutInflater.inflate(R.layout.list_row, null);
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Intent myIntent = new Intent(context, WordActivity.class);
+                    myIntent.putExtra("greece",_word.getGreece());
+                    myIntent.putExtra("persian",_word.getPersion());
+                    context.startActivity(myIntent);
                 }
             });
             TextView tittle=convertView.findViewById(R.id.tv_word);
-            tittle.setText(word.getGreece());
+            tittle.setText(_word.getGreece());
 
         }
         return convertView;
