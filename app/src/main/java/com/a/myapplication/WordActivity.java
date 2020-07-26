@@ -17,6 +17,7 @@ public class WordActivity extends AppCompatActivity {
 
         String greece = myIntent.getStringExtra("greece");
         String persian= myIntent.getStringExtra("persian");
+        String type= myIntent.getStringExtra("type");
 
         TextView tv_definition = findViewById(R.id.tv_definition);
         tv_definition.setText(greece);

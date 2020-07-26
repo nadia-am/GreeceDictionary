@@ -60,6 +60,7 @@ class CustomAdapter implements ListAdapter {
                     Intent myIntent = new Intent(context, WordActivity.class);
                     myIntent.putExtra("greece",_word.getGreece());
                     myIntent.putExtra("persian",_word.getPersion());
+                    myIntent.putExtra("type",_word.getType());
                     context.startActivity(myIntent);
                 }
             });
