@@ -86,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
     private class AsyncTaskRunner extends AsyncTask<String, String, String> {
         @Override
         protected void onPreExecute() {
@@ -156,7 +155,5 @@ public class MainActivity extends AppCompatActivity {
             readSuccessfully = false;
         }
     }
-
-
 
 }
