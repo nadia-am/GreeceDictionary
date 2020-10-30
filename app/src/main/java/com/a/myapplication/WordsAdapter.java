@@ -23,19 +23,21 @@ public class WordsAdapter extends ArrayAdapter<Word> {
         final Word _word = getItem(position);
         if(convertView==null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_row, parent, false);
-            convertView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent myIntent = new Intent(_context, WordActivity.class);
-                    myIntent.putExtra("greece",_word.getGreece());
-                    myIntent.putExtra("persian",_word.getPersion());
-                    myIntent.putExtra("type",_word.getType());
-                    _context.startActivity(myIntent);
-                }
-            });
+//            convertView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent myIntent = new Intent(_context, WordActivity.class);
+//                    myIntent.putExtra("greece",_word.getGreece());
+//                    myIntent.putExtra("persian",_word.getPersion());
+//                    myIntent.putExtra("type",_word.getType());
+//                    _context.startActivity(myIntent);
+//                }
+//            });
             TextView tittle=convertView.findViewById(R.id.tv_word);
             tittle.setText(_word.getPersion());
 
+            TextView tv_word_greece=convertView.findViewById(R.id.tv_word_greece);
+            tv_word_greece.setText(_word.getGreece());
         }
         return convertView;
     }

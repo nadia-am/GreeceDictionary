@@ -7,19 +7,33 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:background="@color/base2_color">
+        android:layout_marginBottom="2dp"
+        android:background="@android:color/white">
+
+        <TextView
+            android:id="@+id/tv_word_greece"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:padding="10dp"
+            android:text="TextView"
+            android:textColor="@color/text_color_pink"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_word"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:padding="20dp"
+            android:padding="10dp"
             android:text="TextView"
-            android:textColor="@android:color/white"
-            android:textSize="24sp" />
+            android:textColor="@color/text_color_grey"
+            android:textSize="18sp"
+            android:textStyle="bold" />
     </RelativeLayout>
 
 </LinearLayout>

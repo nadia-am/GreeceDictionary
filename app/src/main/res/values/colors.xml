@@ -6,4 +6,8 @@
     <color name="base_color">#283593</color>
     <color name="base2_color">#1A237E</color>
     <color name="item_color">#303F9F</color>
+    <color name="light_main_blue">#c8f6fb</color>
+    <color name="text_color_grey">#616161</color>
+    <color name="text_color_pink">#E91E63</color>
+    <color name="transparent_white">#DAFFF7F7</color>
 </resources>
