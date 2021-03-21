@@ -6,6 +6,7 @@ import androidx.core.view.MenuItemCompat;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.os.AsyncTask;
@@ -19,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -36,8 +38,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     ArrayList<Word> arrayList = new ArrayList<>();
     String MY_PREFS_NAME = "dictionary";
     boolean readSuccessfully = false;
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     boolean ifExcellReaded = false;
     EditText etSearch;
     WordsAdapter wordsAdapter;
+    RelativeLayout go_to_dic;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,15 +59,17 @@ public class MainActivity extends AppCompatActivity {
         loading_view = findViewById(R.id.loading_view);
         loading_view.setVisibility(View.GONE);
 
+        go_to_dic = findViewById(R.id.go_to_dic);
+        go_to_dic.setOnClickListener(this);
+
         list = findViewById(R.id.list);
         arrayList = new ArrayList<>();
 
-        new AsyncTaskRunner().execute();
+
 
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
             public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
                 int textlength = cs.length();
@@ -81,24 +85,41 @@ public class MainActivity extends AppCompatActivity {
                 list.setAdapter(wordsAdapter);
             }
             @Override
-            public void afterTextChanged(Editable s) {
-            }
+            public void afterTextChanged(Editable s) {}
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // your code here
+        new AsyncTaskRunner().execute();
+    }
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.go_to_dic:
+                Intent intent = new Intent(getApplicationContext(), LoadPackage.class);
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
     }
 
     private class AsyncTaskRunner extends AsyncTask<String, String, String> {
         @Override
         protected void onPreExecute() {
-            SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
-            ifExcellReaded = prefs.getBoolean("Readexcel", false);
-            Log.i("@Read-state =>",String.valueOf(ifExcellReaded));
+//            SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+//            ifExcellReaded = prefs.getBoolean("Readexcel", false);
+//            Log.i("@Read-state =>",String.valueOf(ifExcellReaded));
             loading_view.setVisibility(View.VISIBLE);
         }
         @Override
         protected String doInBackground(String... params) {
-            if (!ifExcellReaded){
-                ReadExcelFile();
-            }
+//            if (!ifExcellReaded){
+//                ReadExcelFile();
+//            }
             controller controller = new controller(context);
             arrayList = controller.ReadWords();
             return "";
@@ -110,15 +131,14 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
 
-            if (readSuccessfully){
-                SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
-                editor.putBoolean("Readexcel", true);
-                editor.apply();
-            }
+//            if (readSuccessfully){
+//                SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+//                editor.putBoolean("Readexcel", true);
+//                editor.apply();
+//            }
             wordsAdapter = new WordsAdapter(context, arrayList);
             list.setAdapter(wordsAdapter);
             loading_view.setVisibility(View.GONE);
-
         }
     }
 
@@ -155,5 +175,7 @@ public class MainActivity extends AppCompatActivity {
             readSuccessfully = false;
         }
     }
+
+
 
 }
